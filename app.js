@@ -1,12 +1,18 @@
 import express from 'express';
+import mongoose from 'mongoose';
 import AdminBro from 'admin-bro';
 import AdminBroExpress from '@admin-bro/express';
+import AdminBroMongoose from '@admin-bro/mongoose';
 
 import cors from 'cors';
 
 import config from './config';
 
+import User from './models/user';
+
 const app = express();
+
+AdminBro.registerAdapter(AdminBroMongoose);
 
 // CORS
 if (config.CORS_ENABLED) {
@@ -20,13 +26,28 @@ if (config.CORS_ENABLED) {
   app.use(cors(corsOptions));
 }
 
-const adminBro = new AdminBro({
-  Databases: [],
-  rootPath: '/admin',
-});
+// db url
+const mongoDB = process.env.MONGOLAB_URI || config.PASS.DB.url;
 
-const router = AdminBroExpress.buildRouter(adminBro);
+// Admin Bro
 
-app.use(adminBro.options.rootPath, router);
+const run = async () => {
+  const connection = await mongoose.connect(mongoDB, {
+    useCreateIndex: true,
+    useNewUrlParser: true,
+    useFindAndModify: false,
+    useUnifiedTopology: true,
+  });
+
+  const adminBro = new AdminBro({
+    Databases: [connection],
+    rootPath: '/admin',
+    resources: [User],
+  });
+
+  const router = AdminBroExpress.buildRouter(adminBro);
+  app.use(adminBro.options.rootPath, router);
+};
+run();
 
 export default app;

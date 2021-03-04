@@ -1,6 +1,6 @@
 FROM node:lts-alpine
 
-WORKDIR /projects/github/express-auth
+WORKDIR /projects/github/express-babel-bro
 
 COPY package*.json ./
 
@@ -18,7 +18,7 @@ EXPOSE 8082
 CMD ["npm", "run", "prod"]
 
 # Сборка образа
-# sudo docker build -t express-auth .
+# sudo docker build -t express-babel-bro .
 
 # Запуск образа
-# sudo docker run -p 8082:8082 express-auth
+# sudo docker run -p 8082:8082 express-babel-bro

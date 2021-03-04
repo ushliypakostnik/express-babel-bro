@@ -1,3 +1,5 @@
+import PASS from './pass';
+
 const env = process.env.NODE_ENV;
 
 if (env === 'production') {
@@ -6,8 +8,12 @@ if (env === 'production') {
 
 const common = {
   PORT: process.env.PORT || 8082,
-  MEDIA_DIR: process.env.MEDIA_DIR || 'media',
   STATIC_SERVE: false,
+  PASS: {
+    DB: {
+      url: process.env.DB_URL || PASS.DB.url,
+    },
+  },
 };
 
 const development = {
