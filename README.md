@@ -4,7 +4,7 @@ Backend Start Project
 Описание
 --------
 
-Стартовый проект на Express.js с Babel. Для экспиремента с AdminBro.
+Стартовый проект на Express.js с Babel и AdminBro.
 
 
 API
