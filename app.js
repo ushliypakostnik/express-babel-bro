@@ -1,5 +1,4 @@
 import express from 'express';
-// import session from 'express-session';
 import mongoose from 'mongoose';
 import AdminBro from 'admin-bro';
 import AdminBroExpress from '@admin-bro/express';
@@ -13,17 +12,6 @@ import config from './config';
 import User from './models/user';
 
 const app = express();
-
-/*
-// Session config
-app.use(session({
-  secret: config.PASS.COOKIES,
-  cookie: { maxAge: 60000 },
-  resave: false,
-  rolling: true,
-  saveUninitialized: false,
-}));
-*/
 
 AdminBro.registerAdapter(AdminBroMongoose);
 
