@@ -7,16 +7,6 @@ Backend Start Project
 Стартовый проект на Express.js с Babel и AdminBro.
 
 
-API
----
-
-    GET
-    ${HOST}/test
-
-Тестовый роут
-
-*
-
 Deploy
 ------
 
