@@ -43,6 +43,13 @@ const run = async () => {
     Databases: [connection],
     rootPath: '/admin',
     resources: [User],
+    branding: {
+      companyName: 'Test Company Name',
+    },
+    dashboard: {
+      handler: async () => ({ header: 'Test admin panel!!!' }),
+      component: AdminBro.bundle('./components/Dashboard.jsx'),
+    },
   });
 
   const router = AdminBroExpress.buildRouter(adminBro);
