@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import AdminBro from 'admin-bro';
 import AdminBroExpress from '@admin-bro/express';
 import AdminBroMongoose from '@admin-bro/mongoose';
+import uploadFeature from '@admin-bro/upload';
 import bcrypt from 'bcrypt';
 
 import cors from 'cors';
@@ -57,6 +58,13 @@ const run = async () => {
     rootPath: '/admin',
     resources: [{
       resource: User,
+      features: [uploadFeature({
+        provider: { local: { bucket: 'public' } },
+        properties: {
+          key: 'fileKey',
+          mimeType: ['image/jpeg', 'image/jpg', 'image/png'],
+        },
+      })],
       options: {
         properties: {
           encryptedPassword: {
@@ -123,6 +131,7 @@ const run = async () => {
   });
 
   app.use(adminBro.options.rootPath, router);
+  app.use('/public', express.static('public'));
 };
 run();
 
