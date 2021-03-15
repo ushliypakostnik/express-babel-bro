@@ -13,6 +13,7 @@ const common = {
     DB: {
       url: process.env.DB_URL || PASS.DB.url,
     },
+    COOKIES: process.env.COOKIES || PASS.COOKIES,
   },
 };
 
