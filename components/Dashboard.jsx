@@ -18,7 +18,7 @@ const Dashboard = () => {
     <Box variant="grey">
       <Box variant="white">{ data.header }</Box>
     </Box>
-  )
+  );
 };
 
 export default Dashboard;

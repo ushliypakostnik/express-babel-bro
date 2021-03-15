@@ -7,7 +7,7 @@ if (env === 'production') {
 }
 
 const common = {
-  PORT: process.env.PORT || 8082,
+  PORT: process.env.PORT || 8080,
   STATIC_SERVE: false,
   PASS: {
     DB: {

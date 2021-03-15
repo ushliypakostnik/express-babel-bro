@@ -1,4 +1,5 @@
 import express from 'express';
+// import session from 'express-session';
 import mongoose from 'mongoose';
 import AdminBro from 'admin-bro';
 import AdminBroExpress from '@admin-bro/express';
@@ -93,7 +94,13 @@ const run = async () => {
     },
     dashboard: {
       handler: async () => ({ header: 'Test admin panel!!!' }),
-      component: AdminBro.bundle('./components/Dashboard.jsx'),
+      component: AdminBro.bundle('./components/Dashboard'),
+    },
+    pages: {
+      page1: {
+        label: 'Custom page 1',
+        component: AdminBro.bundle('./components/Test'),
+      },
     },
     version: {
       admin: false,
@@ -101,7 +108,20 @@ const run = async () => {
     },
   });
 
-  const router = AdminBroExpress.buildRouter(adminBro);
+  // const router = AdminBroExpress.buildRouter(adminBro);
+  const router = AdminBroExpress.buildAuthenticatedRouter(adminBro, {
+    authenticate: async (name, password) => {
+      const user = await User.findOne({ name });
+      if (user) {
+        const matched = await bcrypt.compare(password, user.encryptedPassword);
+        if (matched) return user;
+      }
+      return false;
+    },
+    cookieName: 'adminbro',
+    cookiePassword: config.PASS.COOKIES,
+  });
+
   app.use(adminBro.options.rootPath, router);
 };
 run();
