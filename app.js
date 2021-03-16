@@ -1,5 +1,4 @@
 import express from 'express';
-// import session from 'express-session';
 import mongoose from 'mongoose';
 import AdminBro from 'admin-bro';
 import AdminBroExpress from '@admin-bro/express';
@@ -14,17 +13,6 @@ import config from './config';
 import User from './models/user';
 
 const app = express();
-
-/*
-// Session config
-app.use(session({
-  secret: config.PASS.COOKIES,
-  cookie: { maxAge: 60000 },
-  resave: false,
-  rolling: true,
-  saveUninitialized: false,
-}));
-*/
 
 AdminBro.registerAdapter(AdminBroMongoose);
 
@@ -84,8 +72,10 @@ const run = async () => {
           new: {
             before: async (request) => {
               if (request.payload.password) {
+                const email = request.payload.email.length === 0 ? '???????' : request.payload.email;
                 request.payload = {
                   ...request.payload,
+                  email,
                   encryptedPassword: await bcrypt.hash(request.payload.password, 10),
                   password: undefined,
                 };
@@ -97,7 +87,7 @@ const run = async () => {
       },
     }],
     branding: {
-      companyName: 'Test Company Name',
+      companyName: config.TITLE,
       softwareBrothers: false,
     },
     dashboard: {
@@ -107,14 +97,15 @@ const run = async () => {
     pages: {
       page1: {
         label: 'Custom page 1',
-        component: AdminBro.bundle('./components/Test'),
+        component: AdminBro.bundle('./components/Page'),
       },
     },
     version: {
       admin: false,
-      app: '0.0.1',
+      app: config.VERSION,
     },
   });
+  AdminBro.bundle('./components/UserMenu', 'LoggedIn');
 
   // const router = AdminBroExpress.buildRouter(adminBro);
   const router = AdminBroExpress.buildAuthenticatedRouter(adminBro, {

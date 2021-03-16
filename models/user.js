@@ -18,6 +18,10 @@ const UserSchema = new Schema({
     enum: ['admin', 'restricted'],
     required: true,
   },
+  email: {
+    type: String,
+    required: false,
+  },
 });
 
 const User = mongoose.model('User', UserSchema);
