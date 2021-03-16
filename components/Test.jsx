@@ -6,7 +6,7 @@ const Test = () => {
     <Box variant="grey">
       <Box variant="white">Test page</Box>
     </Box>
-  )
+  );
 };
 
 export default Test;

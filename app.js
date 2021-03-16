@@ -95,6 +95,9 @@ const run = async () => {
       app: '0.0.1',
     },
   });
+  AdminBro.bundle('./components/LoggedIn', 'LoggedIn');
+
+  console.log(AdminBro.LoggedIn, AdminBro.TopBar);
 
   // const router = AdminBroExpress.buildRouter(adminBro);
   const router = AdminBroExpress.buildAuthenticatedRouter(adminBro, {
