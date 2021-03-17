@@ -18,12 +18,14 @@ const UserMenu = (props) => {
     icon: 'Logout',
   }];
 
+  // console.log('session', session);
+
   return (
     <Box flexShrink={0}>
       <CurrentUserNav
         name={session.email}
-        title={session.name}
-        avatarUrl={session.avatarUrl}
+        title={session.role}
+        avatarUrl={session.avatar}
         dropActions={dropActions}
       />
     </Box>

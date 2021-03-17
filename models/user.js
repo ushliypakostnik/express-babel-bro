@@ -1,13 +1,13 @@
-import mongoose from 'mongoose';
+import config from '../config';
 
-// User Model
+import mongoose from 'mongoose';
 
 const { Schema } = mongoose;
 
 const UserSchema = new Schema({
-  name: {
+  email: {
     type: String,
-    required: true,
+    required: false,
   },
   encryptedPassword: {
     type: String,
@@ -15,10 +15,10 @@ const UserSchema = new Schema({
   },
   role: {
     type: String,
-    enum: ['admin', 'restricted'],
+    enum: [config.ROLE.admin, config.ROLE.user],
     required: true,
   },
-  email: {
+  avatar: {
     type: String,
     required: false,
   },

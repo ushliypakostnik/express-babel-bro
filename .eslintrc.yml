@@ -9,4 +9,9 @@ extends:
   - 'airbnb-base'
   - 'plugin:jest/recommended'
 rules:
+  max-len:
+    - error
+    - code: 150
+      tabWidth: 2
+      ignorePattern: ^import\s.+\sfrom\s.+;$
   no-console: 0
