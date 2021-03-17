@@ -1,4 +1,4 @@
-import PASS from './pass';
+// import PASS from './pass';
 
 const env = process.env.NODE_ENV;
 
@@ -14,9 +14,9 @@ const common = {
   STATIC_SERVE: false,
   PASS: {
     DB: {
-      url: process.env.DB_URL || PASS.DB.url,
+      url: process.env.DB_URL // || PASS.DB.url,
     },
-    COOKIES: process.env.COOKIES || PASS.COOKIES,
+    COOKIES: process.env.COOKIES // || PASS.COOKIES,
   },
   NO_EMAIL: '???????',
   ROLE: {
