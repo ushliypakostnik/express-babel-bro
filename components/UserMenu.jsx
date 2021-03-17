@@ -1,6 +1,8 @@
 // eslint-disable-next-line no-unused-vars, import/no-extraneous-dependencies
 import { CurrentUserNav, Box } from '@admin-bro/design-system';
 
+import config from '../config';
+
 // hoc
 // eslint-disable-next-line import/extensions, import/no-unresolved
 import allowOverride from './hoc/allowOverride';
@@ -25,7 +27,7 @@ const UserMenu = (props) => {
       <CurrentUserNav
         name={session.email}
         title={session.role}
-        avatarUrl={session.avatar}
+        avatarUrl={`${config.BUCKET}/${session.image.key}`}
         dropActions={dropActions}
       />
     </Box>

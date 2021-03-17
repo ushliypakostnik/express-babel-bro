@@ -3,11 +3,14 @@ import mongoose from 'mongoose';
 import AdminBro from 'admin-bro';
 import AdminBroExpress from '@admin-bro/express';
 import AdminBroMongoose from '@admin-bro/mongoose';
+import uploadFeature from '@admin-bro/upload';
 import bcrypt from 'bcrypt';
 
 import cors from 'cors';
 
 import config from './config';
+
+import provider from './utils/upload';
 
 import User from './models/user';
 import Banner from './models/banner';
@@ -31,6 +34,7 @@ if (config.CORS_ENABLED) {
 // db url
 const mongoDB = process.env.MONGOLAB_URI || config.PASS.DB.url;
 
+// Roles
 const canModifyUsers = ({ currentAdmin }) => currentAdmin && currentAdmin.role === config.ROLE.admin;
 
 // Admin Bro
@@ -45,9 +49,20 @@ const run = async () => {
 
   const adminBro = new AdminBro({
     Databases: [connection],
-    rootPath: '/admin',
+    rootPath: config.ROOT_PATH,
     resources: [{
       resource: User,
+      features: [uploadFeature({
+        provider,
+        properties: {
+          key: 'image.key',
+          file: 'image.file',
+          mimeType: 'image.type',
+        },
+        validation: {
+          mimeTypes: ['image/png', 'image/jpg', 'image/jpeg'],
+        },
+      })],
       options: {
         properties: {
           encryptedPassword: {
@@ -64,14 +79,6 @@ const run = async () => {
           },
           _id: {
             isVisible: false,
-          },
-          avatar: {
-            isVisible: {
-              list: false,
-              edit: true,
-              filter: false,
-              show: false,
-            },
           },
         },
         actions: {
@@ -103,7 +110,7 @@ const run = async () => {
           /*
           content: {
             components: {
-              list: AdminBro.bundle('./city-content-in-list'),
+              list: AdminBro.bundle('./components/Component'),
             },
           },
           */
@@ -147,6 +154,7 @@ const run = async () => {
   });
 
   app.use(adminBro.options.rootPath, router);
+  if (config.STATIC_SERVE) app.use(`${config.BUCKET}`, express.static(`${config.BUCKET}`.slice(1)));
 };
 run();
 
