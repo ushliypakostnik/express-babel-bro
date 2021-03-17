@@ -1,4 +1,4 @@
-// import PASS from './pass';
+import PASS from './pass';
 
 const env = process.env.NODE_ENV;
 
@@ -13,9 +13,9 @@ const common = {
   PORT: process.env.PORT || 8081,
   PASS: {
     DB: {
-      url: process.env.DB_URL // || PASS.DB.url,
+      url: process.env.DB_URL || PASS.DB.url,
     },
-    COOKIES: process.env.COOKIES // || PASS.COOKIES,
+    COOKIES: process.env.COOKIES || PASS.COOKIES,
   },
   ROOT_PATH: '/admin',
   BUCKET_ROOT: '/home/levon/projects/github/express-babel-bro',
