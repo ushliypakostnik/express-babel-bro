@@ -4,6 +4,11 @@ import mongoose from 'mongoose';
 
 const { Schema } = mongoose;
 
+const Image = new mongoose.Schema({
+  key: String,
+  type: String,
+});
+
 const UserSchema = new Schema({
   email: {
     type: String,
@@ -18,10 +23,7 @@ const UserSchema = new Schema({
     enum: [config.ROLE.admin, config.ROLE.user],
     required: true,
   },
-  avatar: {
-    type: String,
-    required: false,
-  },
+  image: Image,
 });
 
 const User = mongoose.model('User', UserSchema);
