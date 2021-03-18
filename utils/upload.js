@@ -11,6 +11,7 @@ class MyProvider extends BaseProvider {
 
   async upload(file, key) {
     const filePath = this.path(key);
+
     await fs.promises.mkdir(path.dirname(filePath), { recursive: true });
     await fs.promises.rename(file.path, filePath);
   }
@@ -20,7 +21,7 @@ class MyProvider extends BaseProvider {
   }
 
   path(key) {
-    return `${path.join(`${config.BUCKET}`, key)}`;
+    return `${path.join(`${config.BUCKET_ROOT}${config.BUCKET}`, key)}`;
   }
 }
 

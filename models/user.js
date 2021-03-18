@@ -2,14 +2,9 @@ import mongoose from 'mongoose';
 
 import config from '../config';
 
-const { Schema } = mongoose;
+import Image from './image';
 
-const Image = new mongoose.Schema({
-  key: String,
-  type: String,
-});
-
-const UserSchema = new Schema({
+const UserSchema = new mongoose.Schema({
   email: {
     type: String,
     required: false,

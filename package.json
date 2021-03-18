@@ -32,6 +32,7 @@
     "fs": "0.0.1-security",
     "mongoose": "^5.11.15",
     "nodemon": "^1.19.4",
+    "styled-components": "^5.2.1",
     "url": "^0.11.0"
   },
   "devDependencies": {
