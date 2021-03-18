@@ -7,7 +7,7 @@ if (env === 'production') {
   require('dotenv').config();
 }
 
-const PORT = 8083;
+const PORT = 8080;
 
 const common = {
   VERSION: '0.1.0',
