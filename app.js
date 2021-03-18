@@ -11,8 +11,8 @@ import config from './config';
 
 import User from './models/user';
 
-import Users from './admin/users';
-import Banners from './admin/banners';
+import Users from './resources/users';
+import Banners from './resources/banners';
 
 const app = express();
 
@@ -87,7 +87,7 @@ const run = async () => {
   });
 
   app.use(adminBro.options.rootPath, router);
-  if (config.STATIC_SERVE) app.use(`${config.BUCKET}`, express.static(`${config.BUCKET}`.slice(1)));
+  if (config.STATIC_SERVE) app.use(`${config.BUCKET_ROOT}${config.BUCKET}`, express.static(`${config.BUCKET}`.slice(1)));
 };
 run();
 

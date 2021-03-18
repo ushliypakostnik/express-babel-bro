@@ -1,3 +1,4 @@
+import AdminBro from "admin-bro";
 import uploadFeature from '@admin-bro/upload';
 import bcrypt from 'bcrypt';
 
@@ -38,6 +39,12 @@ const Users = {
       },
       _id: {
         isVisible: false,
+      },
+      image: {
+        components: {
+          list: AdminBro.bundle('../components/Image'),
+          show: AdminBro.bundle('../components/Image'),
+        },
       },
     },
     actions: {

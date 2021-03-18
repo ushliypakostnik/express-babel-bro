@@ -7,10 +7,12 @@ if (env === 'production') {
   require('dotenv').config();
 }
 
+const PORT = 8083;
+
 const common = {
   VERSION: '0.1.0',
   TITLE: 'Company',
-  PORT: process.env.PORT || 8081,
+  PORT: process.env.PORT || PORT,
   PASS: {
     DB: {
       url: process.env.DB_URL || PASS.DB.url,
@@ -24,11 +26,16 @@ const common = {
     admin: 'admin',
     user: 'user',
   },
+  VIEWS: {
+    list: 'list',
+    edit: 'edit',
+    show: 'show',
+  },
 };
 
 const development = {
   ...common,
-  HOST: process.env.HOST || 'http://localhost:8082',
+  HOST: process.env.HOST || `http://localhost:${PORT}`,
   CORS_ENABLED: true,
   STATIC_SERVE: true,
 };

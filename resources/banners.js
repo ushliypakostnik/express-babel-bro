@@ -1,3 +1,4 @@
+import AdminBro from 'admin-bro';
 import uploadFeature from '@admin-bro/upload';
 
 import provider from '../utils/upload';
@@ -22,13 +23,12 @@ const Banners = {
       _id: {
         isVisible: false,
       },
-      /*
-      content: {
+      image: {
         components: {
-          list: AdminBro.bundle('./components/Component'),
+          list: AdminBro.bundle('../components/Image'),
+          show: AdminBro.bundle('../components/Image'),
         },
       },
-      */
     },
   },
 };
