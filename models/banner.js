@@ -1,16 +1,13 @@
 import mongoose from 'mongoose';
 
-const { Schema } = mongoose;
+import Image from './image';
 
-const BannerSchema = new Schema({
+const BannerSchema = new mongoose.Schema({
   order: {
     type: Number,
     required: false,
   },
-  image: {
-    type: String,
-    required: false,
-  },
+  image: Image,
 });
 
 const Banner = mongoose.model('Banner', BannerSchema);
